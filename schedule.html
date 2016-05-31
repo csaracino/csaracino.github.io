@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="cst-lightpage cst-fulljumbotronpage" lang="en">
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:400,300,300italic" rel="stylesheet" type="text/css">
+		<link href="images/favicon.png" rel="icon" type="image/png">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/cst-theme.css" rel="stylesheet">
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/respond.js"></script>
+		<script src="js/shiv.js"></script>
+		<script src="js/mask.js"></script>
+		<script src="js/autosize.js"></script>
+		<script src="js/moment.js"></script>
+		<script>
+			$(document).ready(function(){
+				$.getJSON("http://spreadsheets.google.com/feeds/list/1HlG5MzylFwjYoal0zow31dj_tIHGIF888SCMQgW6rp4/od6/public/values?alt=json", function(data){
+					var uniquedates = [];
+					datelistings = [];
+					$(data.feed.entry).each(function(count, row){
+						var date = row.title.$t;
+						var timerange = row.gsx$starttime.$t + " to " + row.gsx$endtime.$t
+						if ($.inArray(date, uniquedates) == -1){
+							uniquedates.push(date);
+							var rowarray = [date, timerange];
+							datelistings.push(rowarray);
+						}
+						else {
+							$(datelistings).each(function(count, listing){
+								if (listing[0] == date){
+									listing.push(timerange);
+								};
+							});
+						};
+					});
+					if (uniquedates.length <= 0){
+						$('.cst-jshdatedropdown').append('<li class="cst-formdropdownexplanatorytext"><a href="#">No dates are available for tutoring at this time</a></li>');
+					}
+					else {
+						$(uniquedates).each(function(count, date){
+							$('.cst-jshdatedropdown').append('<li><a href="#">' + date + '</a></li>');
+						});
+					};					
+				})
+				.fail(function(){
+					$('.cst-jshdatedropdown').append('<li class="cst-formdropdownexplanatorytext"><a href="#">No dates are available for tutoring at this time</a></li>');
+				});
+				$('.dropdown-toggle').dropdown()
+				$('.cst-formsubmitbutton').attr("disabled", true);
+				$('.cst-timedropdownbtn').attr("disabled", true);
+				$('.cst-jshinputphone').mask("(000) 000-0000");
+				autosize($('.cst-contactformtextarea'));
+			});
+		</script>
+		<title>Schedule a Session — Carolynn Saracino</title>
+	</head>
+	<body class="cst-lightbody" role="document">
+		<div class="cst-lightnavbar navbar navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="cst-lightnavbartoggle navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="cst-navbarbrand navbar-brand" href="index.html">Carolynn Saracino</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="cst-lightnavbarlinkgroup nav navbar-nav">
+						<li><a class="cst-lightnavbarlink" href="about.html">About Me</a></li>
+						<li><a class="cst-lightnavbarlink" href="services.html">Services</a></li>
+						<li><a class="cst-lightnavbarlink" href="contact.html">Contact</a></li>
+						<li><a class="cst-activenavbarlink cst-lightnavbarlink" href="#">Schedule a Session</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<noscript>
+			<div class="cst-jsalert alert alert-danger" role="alert">
+				<span class="cst-jsalertstrongtext">Some components of this site require JavaScript.</span> Please enable JavaScript to fully navigate the site.
+			</div>
+		</noscript>
+		<div class="cst-pagecontainer">
+			<div class="cst-descriptioncontainer">
+				<div class="cst-descriptionheader">Schedule a Session</div>
+				<div class="cst-descriptiontext">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+				</div>
+				<div class="cst-formcontainer">
+					<form id="cst-sessionscheduleform" action="https://script.google.com/macros/s/AKfycbxKpbM9SFwHKQ_dl3H5DClgNrIGlxNsMlWFNAtHTxyMs0GpD3c/exec" method="post" target="cst-jshiframe">
+						<iframe name="cst-jshiframe" class="hidden"></iframe>
+						<input type="hidden" name="rawdate" class="cst-jshinputrawdate">
+						<input type="hidden" name="rawstarttime" class="cst-jshinputrawstarttime">
+						<input type="hidden" name="rawendtime" class="cst-jshinputrawendtime">
+						<input type="hidden" name="date" class="cst-jshinputdate">
+						<input type="hidden" name="starttime" class="cst-jshinputstarttime">
+						<input type="hidden" name="endtime" class="cst-jshinputendtime">
+						<div class="cst-formbuttongroup btn-group btn-group-justified">
+							<div class="cst-formdatebuttongroup btn-group">
+								<button type="button" class="cst-datedropdownbtn cst-formdatedropdownbutton cst-formdropdownbutton btn-default btn dropdown-toggle" data-toggle="dropdown">Choose Date <span class="caret"></span></button>
+									<ul class="cst-jshdatedropdown cst-formdropdownmenu dropdown-menu"></ul>
+							</div>
+							<script>
+								$(document).on("click", ".cst-jshdatedropdown li a", function(event){
+									event.preventDefault();
+									var selected = $(this).text();
+									$('.cst-jshinputrawdate').val(selected);
+									$('.cst-jshinputdate').val(moment(selected).format("MMMM DD, YYYY"));
+									if ($(window).width() < 768){
+										$('.cst-datedropdownbtn').text(moment(selected).format("MMM D, YYYY"));
+									}
+									else {
+										$('.cst-datedropdownbtn').text(selected);
+									};
+									$('.cst-timedropdownbtn').html('Choose Time <span class="caret"></span>');
+									$('.cst-formsubmitbutton').attr("disabled", true);
+									$(datelistings).each(function(count, listing){
+										if (listing[0] == selected){
+											$('.cst-jshtimedropdown').empty();
+											$(listing).each(function(count, time){
+												if (count > 0){
+													$('.cst-jshtimedropdown').append('<li><a href="#">' + time + '</a></li>');
+												};
+											});
+										};
+									});
+									$('.cst-timedropdownbtn').attr("disabled", false);
+								});
+							</script>
+							<div class="cst-formtimebuttongroup btn-group">
+								<button type="button" class="cst-timedropdownbtn cst-formdatedropdownbutton cst-formdropdownbutton btn-default btn dropdown-toggle" data-toggle="dropdown">Choose Time <span class="caret"></span></button>
+									<ul class="cst-jshtimedropdown cst-formdropdownmenu dropdown-menu dropdown-menu-right"></ul>
+							</div>
+							<script>
+								$(document).on("click", ".cst-jshtimedropdown li a", function(event){
+									event.preventDefault();
+									var selected = $(this).text();
+									$('.cst-jshinputrawstarttime').val(selected.split(" to ")[0]);
+									$('.cst-jshinputrawendtime').val(selected.split(" to ")[1]);
+									$('.cst-jshinputstarttime').val(moment("January 9, 2007 " + selected.split(" to ")[0]).format("HH:mm:ss"));
+									$('.cst-jshinputendtime').val(moment("January 9, 2007 " + selected.split(" to ")[1]).format("HH:mm:ss"));
+									if ($(window).width() < 768){
+										$('.cst-timedropdownbtn').text(selected.replace("AM", "").replace("AM", "").replace("PM", "").replace("PM", ""));
+									}
+									else {
+										$('.cst-timedropdownbtn').text(selected);
+									};
+									$('.cst-formsubmitbutton').attr("disabled", false);
+								});
+							</script>
+						</div>
+						<input name="studentname" type="text" placeholder="Student's Name" class="cst-forminput form-control">
+						<input name="guardianname" type="text" placeholder="Guardian's Name" class="cst-forminput form-control">
+						<input name="email" type="email" placeholder="Guardian's Email Address" class="cst-forminput form-control">
+						<input name="phonenumber" type="text" pattern="[0-9]*" placeholder="Guardian's Phone Number" class="cst-jshinputphone cst-forminput form-control">
+						<input name="subject" type="text" placeholder="Subjects or Topics to Review" class="cst-forminput form-control">
+						<textarea form="cst-sessionscheduleform" name="notes" rows="3" placeholder="Notes or Special Instructions" class="cst-formtextarea cst-forminput form-control"></textarea>
+						<input type="submit" value="Book Session" class="cst-formsubmitbutton btn-success btn">
+					</form>
+					<script>
+						$('.cst-formsubmitbutton').click(function(e){
+							e.preventDefault();
+							$("#cst-sessionscheduleform").on("submit", function(){
+								window.location.assign("postschedule.html");
+							});
+							$('.cst-formsubmitbutton').attr("disabled", true);
+							$('.cst-formsubmitbutton').val("Processing...");
+							$("#cst-sessionscheduleform").submit();
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="cst-footer"></div>
+	</body>
+</html>
