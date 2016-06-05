@@ -22,7 +22,7 @@
 					datelistings = [];
 					$(data.feed.entry).each(function(count, row){
 						var date = row.title.$t;
-						var timerange = row.gsx$starttime.$t + " to " + row.gsx$endtime.$t
+						var timerange = row.gsx$starttime.$t + " to " + row.gsx$endtime.$t;
 						if ($.inArray(date, uniquedates) == -1){
 							uniquedates.push(date);
 							var rowarray = [date, timerange];
