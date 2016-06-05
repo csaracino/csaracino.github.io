@@ -130,10 +130,11 @@
 	min-height: 75px;
 }
 .cst-descriptionheader {
-	margin-bottom: 4px;
+	margin-bottom: 7px;
 	font-family: Lato;
 	font-size: 36px;
 	font-weight: 400;
+	line-height: 1.2em;
 	color: #00bcd4;
 }
 .cst-descriptiontext {
@@ -144,6 +145,15 @@
 }
 .cst-descriptionaccenttext {
 	color: #00acc1;
+}
+.cst-descriptionstrongaccenttext {
+	font-weight: 400;
+	font-style: italic;
+}
+.cst-descriptionaccentlink,
+.cst-descriptionaccentlink:hover {
+	color: #00acc1;
+	text-decoration: underline;
 }
 .cst-alertcontainer {
 	margin-top: 23vh;
@@ -194,6 +204,7 @@
 }
 .cst-alternateserviceitemdescriptionaccenttext > a {
 	color: #66bb6a;
+	text-decoration: underline;
 }
 .cst-calloutcontainer {
 	margin: 0 auto;
