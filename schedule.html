@@ -20,7 +20,7 @@
 				if ($(window).width() < 768){
 					$('[name="location"]').attr("placeholder", "Session Location");
 				};
-				$.getJSON("http://spreadsheets.google.com/feeds/list/1HlG5MzylFwjYoal0zow31dj_tIHGIF888SCMQgW6rp4/od6/public/values?alt=json", function(data){
+				$.getJSON("https://spreadsheets.google.com/feeds/list/1HlG5MzylFwjYoal0zow31dj_tIHGIF888SCMQgW6rp4/od6/public/values?alt=json", function(data){
 					var uniquedates = [];
 					datelistings = [];
 					$(data.feed.entry).each(function(count, row){
@@ -49,7 +49,6 @@
 					};
 				})
 				.fail(function(){
-					console.log("failed");
 					$('.cst-jshdatedropdown').append('<li class="cst-formdropdownexplanatorytext"><a href="#">No dates are available for tutoring at this time</a></li>');
 				});
 				$('.dropdown-toggle').dropdown()
