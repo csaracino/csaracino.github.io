@@ -94,8 +94,7 @@
 					<span class="cst-descriptionstrongaccenttext">One-on-one tutoring sessions are available at the rate of <span class="cst-descriptionaccenttext">$25 per hour</span>, paid via cash or check at the end of the session</span>. You can quickly and easily schedule a session by filling out the required information below. If a specific street address is not provided below, the session will be held at the <a class="cst-descriptionaccentlink" href="http://www.sdcl.org/locations_4S.html">San Diego County Library in 4S Ranch</a>. To cancel a previously booked session, <a class="cst-descriptionaccentlink" href="contact.html">send me a message</a>.
 				</div>
 				<div class="cst-formcontainer">
-					<form id="cst-sessionscheduleform" action="https://script.google.com/macros/s/AKfycbxKpbM9SFwHKQ_dl3H5DClgNrIGlxNsMlWFNAtHTxyMs0GpD3c/exec" method="post" target="cst-jshiframe">
-						<iframe name="cst-jshiframe" class="hidden"></iframe>
+					<form id="cst-sessionscheduleform">
 						<input type="hidden" name="rawdate" class="cst-jshinputrawdate">
 						<input type="hidden" name="rawstarttime" class="cst-jshinputrawstarttime">
 						<input type="hidden" name="rawendtime" class="cst-jshinputrawendtime">
@@ -144,8 +143,8 @@
 									var selected = $(this).text();
 									$('.cst-jshinputrawstarttime').val(selected.split(" to ")[0]);
 									$('.cst-jshinputrawendtime').val(selected.split(" to ")[1]);
-									$('.cst-jshinputstarttime').val(moment("January 9, 2007 " + selected.split(" to ")[0]).format("HH:mm:ss"));
-									$('.cst-jshinputendtime').val(moment("January 9, 2007 " + selected.split(" to ")[1]).format("HH:mm:ss"));
+									$('.cst-jshinputstarttime').val(moment("January 9, 2007 " + selected.split(" to ")[0]).subtract(1, "hours").format("HH:mm:ss"));
+									$('.cst-jshinputendtime').val(moment("January 9, 2007 " + selected.split(" to ")[1]).subtract(1, "hours").format("HH:mm:ss"));
 									if ($(window).width() < 768){
 										$('.cst-timedropdownbtn').text(selected.replace("AM", "").replace("AM", "").replace("PM", "").replace("PM", ""));
 									}
@@ -168,12 +167,26 @@
 					<script>
 						$('.cst-formsubmitbutton').click(function(e){
 							e.preventDefault();
-							$("#cst-sessionscheduleform").on("submit", function(){
-								window.location.assign("postschedule.html");
-							});
 							$('.cst-formsubmitbutton').attr("disabled", true);
 							$('.cst-formsubmitbutton').val("Processing...");
-							$("#cst-sessionscheduleform").submit();
+							$.get("https://script.google.com/macros/s/AKfycbxKpbM9SFwHKQ_dl3H5DClgNrIGlxNsMlWFNAtHTxyMs0GpD3c/exec", {
+								rawdate: $('[name="rawdate"]').val(),
+								rawstarttime: $('[name="rawstarttime"]').val(),
+								rawendtime: $('[name="rawendtime"]').val(),
+								date: $('[name="date"]').val(),
+								starttime: $('[name="starttime"]').val(),
+								endtime: $('[name="endtime"]').val(),
+								studentname: $('[name="studentname"]').val(),
+								guardianname: $('[name="guardianname"]').val(),
+								email: $('[name="email"]').val(),
+								phonenumber: $('[name="phonenumber"]').val(),
+								location: $('[name="location"]').val(),
+								subject: $('[name="subject"]').val(),
+								notes: $('[name="notes"]').val()
+							})
+							.always(function(){
+								window.location.assign("postschedule.html");
+							});
 						});
 					</script>
 				</div>
