@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="cst-lightpage cst-fulljumbotronpage" lang="en">
 	<head>
-		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:400,300,300italic" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:400,400italic,300,300italic" rel="stylesheet" type="text/css">
 		<link href="images/favicon.png" rel="icon" type="image/png">
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +17,9 @@
 		<script src="js/moment.js"></script>
 		<script>
 			$(document).ready(function(){
+				if ($(window).width() < 768){
+					$('[name="location"]').attr("placeholder", "Session Location");
+				};
 				$.getJSON("http://spreadsheets.google.com/feeds/list/1HlG5MzylFwjYoal0zow31dj_tIHGIF888SCMQgW6rp4/od6/public/values?alt=json", function(data){
 					var uniquedates = [];
 					datelistings = [];
@@ -43,9 +46,10 @@
 						$(uniquedates).each(function(count, date){
 							$('.cst-jshdatedropdown').append('<li><a href="#">' + date + '</a></li>');
 						});
-					};					
+					};
 				})
 				.fail(function(){
+					console.log("failed");
 					$('.cst-jshdatedropdown').append('<li class="cst-formdropdownexplanatorytext"><a href="#">No dates are available for tutoring at this time</a></li>');
 				});
 				$('.dropdown-toggle').dropdown()
@@ -88,7 +92,7 @@
 			<div class="cst-descriptioncontainer">
 				<div class="cst-descriptionheader">Schedule a Session</div>
 				<div class="cst-descriptiontext">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+					<span class="cst-descriptionstrongaccenttext">One-on-one tutoring sessions are available at the rate of <span class="cst-descriptionaccenttext">$25 per hour</span>, paid via cash or check at the end of the session</span>. You can quickly and easily schedule a session by filling out the required information below. If a specific street address is not provided below, the session will be held at the <a class="cst-descriptionaccentlink" href="http://www.sdcl.org/locations_4S.html">San Diego County Library in 4S Ranch</a>. To cancel a previously booked session, <a class="cst-descriptionaccentlink" href="contact.html">send me a message</a>.
 				</div>
 				<div class="cst-formcontainer">
 					<form id="cst-sessionscheduleform" action="https://script.google.com/macros/s/AKfycbxKpbM9SFwHKQ_dl3H5DClgNrIGlxNsMlWFNAtHTxyMs0GpD3c/exec" method="post" target="cst-jshiframe">
@@ -157,6 +161,7 @@
 						<input name="guardianname" type="text" placeholder="Guardian's Name" class="cst-forminput form-control">
 						<input name="email" type="email" placeholder="Guardian's Email Address" class="cst-forminput form-control">
 						<input name="phonenumber" type="text" pattern="[0-9]*" placeholder="Guardian's Phone Number" class="cst-jshinputphone cst-forminput form-control">
+						<input name="location" type="text" placeholder="Session Location (leave blank for 4S Ranch Library)" class="cst-forminput form-control">
 						<input name="subject" type="text" placeholder="Subjects or Topics to Review" class="cst-forminput form-control">
 						<textarea form="cst-sessionscheduleform" name="notes" rows="3" placeholder="Notes or Special Instructions" class="cst-formtextarea cst-forminput form-control"></textarea>
 						<input type="submit" value="Book Session" class="cst-formsubmitbutton btn-success btn">
