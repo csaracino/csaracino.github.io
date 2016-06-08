@@ -175,10 +175,7 @@
 	color: #546e7a;
 }
 .cst-serviceratecontainer {
-	margin-bottom: 80px;
-	text-align: center;
 	font-family: Lato;
-	font-size: 26px;
 	color: #546e7a;
 }
 .cst-servicerateaccenttext {
@@ -381,6 +378,10 @@
 		width: 87%;
 		margin-top: 40px;
 	}
+	.cst-serviceratecontainer {
+		margin-bottom: 40px;
+		font-size: 20px;
+	}
 	.cst-serviceitemheader {
 		margin-bottom: 15px;
 	}
@@ -453,6 +454,11 @@
 	.cst-pagecontainer {
 		width: 78%;
 		margin-top: 70px;
+	}
+	.cst-serviceratecontainer {
+		margin-bottom: 80px;
+		font-size: 26px;
+		text-align: center;
 	}
 	.cst-serviceitemheader {
 		text-align: right;
