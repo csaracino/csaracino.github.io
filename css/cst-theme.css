@@ -174,6 +174,20 @@
 	font-weight: 300;
 	color: #546e7a;
 }
+.cst-serviceratecontainer {
+	margin-bottom: 80px;
+	text-align: center;
+	font-family: Lato;
+	font-size: 26px;
+	color: #546e7a;
+}
+.cst-servicerateaccenttext {
+	color: #00bcd4;
+}
+.cst-serviceratedollarsign {
+	vertical-align: top;
+	font-size: 20px;
+}
 .cst-serviceitemcontainer {
 	margin-bottom: 50px;
 }
