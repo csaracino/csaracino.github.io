@@ -244,6 +244,34 @@
 .cst-calloutbutton:focus {
 	background-color: #00acc1 !important;
 }
+.cst-testimonialsheader {
+	font-family: Lato;
+	font-size: 36px;
+	font-weight: 400;
+	line-height: 1.2em;
+	color: #00bcd4;
+}
+.cst-testimonialitemcontainer {
+	font-family: Merriweather;
+}
+.cst-testimonialquotationmark {
+	font-weight: bolder;
+	font-size: 24px;
+	color: rgba(120, 144, 156, 0.6);
+}
+.cst-testimonialtext {
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 1.8em;
+	color: #546e7a;
+}
+.cst-testimonialattribution {
+	margin-top: 12px;
+	text-align: right;
+	font-weight: 300;
+	font-style: italic;
+	color: #78909c;
+}
 .cst-formcontainer {
 	margin-top: 33px;
 }
@@ -302,6 +330,9 @@
 .cst-formsubmitbutton:focus {
 	background-color: #4caf50;
 	border-color: #43a047;
+}
+.cst-wideformsubmitbutton {
+	width: 190px !important;
 }
 .cst-formbuttongroup {
 	margin-bottom: 20px;
@@ -401,6 +432,12 @@
 		height: 48px;
 		line-height: 27px;
 	}
+	.cst-testimonialsheader {
+		margin-bottom: 42px;
+	}
+	.cst-testimonialitemcontainer {
+		margin-bottom: 47px;
+	}
 	.cst-formdropdownmenu {
 		width: 190%;
 	}
@@ -483,6 +520,12 @@
 		height: 60px;
 		font-size: 18px;
 		line-height: 38px;
+	}
+	.cst-testimonialsheader {
+		margin-bottom: 60px;
+	}
+	.cst-testimonialitemcontainer {
+		margin-bottom: 75px;
 	}
 	.cst-formdropdownmenu {
 		width: 100%;
