@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="cst-lightpage cst-fulljumbotronpage" lang="en">
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:400,300,300italic" rel="stylesheet" type="text/css">
+		<link href="images/favicon.png" rel="icon" type="image/png">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/cst-theme.css" rel="stylesheet">
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/respond.js"></script>
+		<script src="js/shiv.js"></script>
+		<script>
+			$(document).ready(function(){
+				$.getJSON("https://spreadsheets.google.com/feeds/list/1QMQs9K3P2aPIDcgCcUPlETP0QET8YnlVYUM6czcGXy8/od6/public/values?alt=json", function(data){
+					if (typeof data.feed.entry == "undefined"){
+						$('.cst-testimonialsheader').remove();
+						$('.cst-pagecontainer').append('<div class="cst-alertcontainer"><div class="cst-alertheader">An error has occurred.</div><div class="cst-alerttext">The content of this page could not be loaded properly. Please try to view the page again later. We\'re sorry for the inconvenience.</div></div>');
+					}
+					else {
+						$(data.feed.entry).each(function(count, row){
+							$('.cst-pagecontainer').append('<div class="cst-testimonialitemcontainer"><span class="cst-testimonialtext"><sub class="cst-testimonialquotationmark">“</sub> ' + row.gsx$testimonial.$t + ' <sub class="cst-testimonialquotationmark">”</sub></span><div class="cst-testimonialattribution">— ' + row.gsx$clientname.$t + ', ' + row.gsx$clientlocation.$t + '</div></div>');
+						});
+					};
+				})
+				.fail(function(){
+					$('.cst-testimonialsheader').remove();
+					$('.cst-pagecontainer').append('<div class="cst-alertcontainer"><div class="cst-alertheader">An error has occurred.</div><div class="cst-alerttext">The content of this page could not be loaded properly. Please try to view the page again later. We\'re sorry for the inconvenience.</div></div>');
+				});
+			});
+		</script>
+		<title>Testimonials — Carolynn Saracino</title>
+	</head>
+	<body class="cst-lightbody" role="document">
+		<div class="cst-lightnavbar navbar navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="cst-lightnavbartoggle navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="cst-navbarbrand navbar-brand" href="index.html">Carolynn Saracino</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="cst-lightnavbarlinkgroup nav navbar-nav">
+						<li><a class="cst-lightnavbarlink" href="about.html">About Me</a></li>
+						<li><a class="cst-lightnavbarlink" href="services.html">Services</a></li>
+						<li><a class="cst-activenavbarlink cst-lightnavbarlink" href="#">Testimonials</a></li>
+						<li><a class="cst-lightnavbarlink" href="contact.html">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<noscript>
+			<div class="cst-jsalert alert alert-danger" role="alert">
+				<span class="cst-jsalertstrongtext">Some components of this site require JavaScript.</span> Please enable JavaScript to fully navigate the site.
+			</div>
+		</noscript>
+		<div class="cst-pagecontainer">
+			<div class="cst-testimonialsheader">Testimonials</div>
+		</div>
+		<div class="cst-footer"></div>
+	</body>
+</html>
